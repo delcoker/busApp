@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.2//EN"
-"http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
+    "http://www.openmobilealliance.org/tech/DTD/xhtml-mobile12.dtd">
 
 <!DOCTYPE html>
 <!--
@@ -10,7 +10,7 @@ and open the template in the editor.
 <html>
     <head xmlns="http://www.w3.org/1999/xhtml">
         <meta charset="UTF-8">
-        <title>Bus Administrator</title>
+            <title>Bus Administrator</title>
     </head>
     <body>
         <?php
@@ -53,9 +53,14 @@ and open the template in the editor.
         if ($mobile_browser > 0) {
 // do something
             print "This is a mobile";
+            header("location: login_mobile.php"); //redirect to home page
+            echo "<a href='login_mobile.php'>click here</a>"; //if redirect fails, provide a link
         } else {
 // do something else
             print "NOT a mobile";
+            header("location: login_web.php"); //redirect to home page
+            echo "<a href='login_web.php'>click here</a>"; //if redirect fails, provide a link
+
         }
         ?>
     </body>

@@ -7,7 +7,7 @@
  */
 
 define("DB_HOST", 'localhost');
-define("DB_NAME", 'webtechGroup5');
+define("DB_NAME", 'mobileBusApp');
 define("DB_PORT", 3306);
 define("DB_USER","root");
 define("DB_PWORD","");
