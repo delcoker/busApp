@@ -24,7 +24,7 @@ if (isset($_REQUEST['username'])) {
         session_start(); //initiate session for the current login
 //			print $username;
         loadUserProfile($username); //load user information into the session
-        header("location: health_promotion_list.php"); //redirect to home page
+        header("location: increase_or_naa.php"); //redirect to home page
         echo "<a href=' health_promotion_list.php'>click here</a>"; //if redirect fails, provide a link
         exit();
     } else {
