@@ -274,13 +274,14 @@ function save() {
     var id = 1;
 
     var u = "queries_action.php?cmd=" + 1 + "&onbus=" + onBus + "&reserved=" + reserved;
-    
-    if(onBus > seats || reserved > seats){
+    var total = +reserved + +onBus;
+    alert(total);
+    if(total > seats){
         alert("Number of passengers or reserved seats cannot be greater than the number of seats.");
         return;
     }
     r = syncAjax(u);
-
+    alert("saved");
 }
 
 function feedback(data) {
