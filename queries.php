@@ -25,7 +25,8 @@ class queries extends adb {
      *           and maybe                   : total number of seats on this bus
      */
     function update_data($num_of_passengers, $reserved_seats) {
-        $query = "Update numofpsngers SET onbus='$num_of_passengers', reserved='$reserved_seats', lastModified=now() where numofpsngersid = '1'";
+        $query = "Update numofpsngers SET onbus=$num_of_passengers, reserved=$reserved_seats, lastModified=now() where numofpsngersid = 1;";
+//        print $query;
         return $this->query($query);
     }
 

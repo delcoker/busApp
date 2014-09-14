@@ -10,10 +10,10 @@ include_once './gen.php';
 include_once './queries.php';
 
 $cmd = get_datan("cmd");
-$id = get_data("id");
-$date = get_data("date");
-$venue = get_data("venue");
-$page = get_datan("start");
+//$id = get_data("id");
+//$date = get_data("date");
+//$venue = get_data("venue");
+//$page = get_datan("start");
 
 switch ($cmd) {
 
@@ -42,13 +42,12 @@ function update_data() {
     $p->update_data($onbus, $reserved);
 
     if ($p) {
-        $row = $p->fetch();
+//        $p->fetch();
         echo "{";
         echo jsonn("result", 1) . ",";
         echo jsons("message", "retrieved") . ",";
-        echo jsons("reserved", $row['reserved']);
-        echo jsons("onbus", $row['onbus']);
-        echo jsons("totalseats", $row['totalseats']);
+        echo jsonn("reserved", $reserved). ",";
+        echo jsonn("onbus", $onbus);
         echo "}";
         return;
     }

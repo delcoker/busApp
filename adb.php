@@ -1,4 +1,4 @@
-<?php
+    <?php
 
 /**
  * author: 
@@ -6,7 +6,7 @@
  * description: A root class for all manage classes. This class communicates with DB
  */
 define("DB_HOST", 'localhost');
-define("DB_NAME", 'mobileBusApp');
+define("DB_NAME", 'mobilebusapp');
 define("DB_PORT", 3306);
 define("DB_USER", "root");
 define("DB_PWORD", "");
@@ -35,7 +35,7 @@ class adb {
 
         $this->er_code_prefix = 1000;
         $this->link = false;
-        $this->result = false;
+        $this->result = 0;
     }
 
     /**
@@ -86,6 +86,7 @@ class adb {
      * returns a row from a data source
      */
     function fetch() {
+		//print_r(mysql_fetch_assoc(0));
         return mysql_fetch_assoc($this->result);
     }
 
@@ -93,12 +94,13 @@ class adb {
      * connect to db and run a query 
      */
     function query($str_sql) {
-
+//        print $str_sql;
         if (!$this->connect()) {
             return false;
         }
 
         $this->result = mysql_query($str_sql);
+//        print $this->result;
         if (!$this->result) {
             $this->log_error(LOG_LEVEL_DB_FAIL, 4, "query failed", mysql_error($this->link));
             return false;
@@ -106,18 +108,6 @@ class adb {
 
         return true;
     }
-
-//    function add_vaccine($vaccine_name, $schedule, $url) {
-//        //Write the SQL query and call $->query()
-//        $query = "insert into vaccines set vaccine_name = '$vaccine_name', schedule = $schedule, url = '$url'";
-//        return $this->query($query);
-//    }
-//
-//    function update_vaccine($vid, $vaccine_name, $schedule, $url) {
-//        //Using $vid as the determiner
-//        $query = "update vaccines set vaccine_name = '$vaccine_name', schedule = $schedule, url = '$url' where vaccine_id = '$vid'";
-//        return $this->query($query);
-//    }
 
     /**
      * returns number of rows in current dataset
@@ -129,7 +119,7 @@ class adb {
     /**
      * returns last auto generated id 
      */
-    function get_insert_id() {
+    function get_insert_id($obj) {
         return mysql_insert_id();
     }
 

@@ -12,10 +12,6 @@ and open the template in the editor.
         <link href="css/mycss.css" rel="stylesheet">
     </head>
     <body>
-
-        <script src="js/jquery-1.11.1.min.js"></script>
-        <script src="js/bootstrap.js"></script>
-
         <div class="container">
             <div id="wrapper">
 
@@ -96,6 +92,9 @@ and open the template in the editor.
             </div>
             <!-- /#wrapper -->
         </div>
+        <script src="js/jquery-1.11.1.min.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/myjs.js"></script>
     </body>
 
 </html>

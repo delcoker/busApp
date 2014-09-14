@@ -267,14 +267,18 @@ function save() {
     //complete the url
 //    var vtop = document.getElementById("topic").value;
 
+    var seats = $("#noOfSeats").val();
     var onBus = $("#noOfPassengers").val();
     var reserved = $("#noOfResSeats").val();
 
     var id = 1;
 
     var u = "queries_action.php?cmd=" + 1 + "&onbus=" + onBus + "&reserved=" + reserved;
-//alert(u);
-//prompt("Copy to clipboard: Ctrl+C, Enter", u);
+    
+    if(onBus > seats || reserved > seats){
+        alert("Number of passengers or reserved seats cannot be greater than the number of seats.");
+        return;
+    }
     r = syncAjax(u);
 
 }
