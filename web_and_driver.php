@@ -29,10 +29,19 @@ and open the template in the editor.
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="col-md-6">
-                                    <label>No Of Passengers on bus</label>
+                                    <label>No of Passengers on Bus</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="noOfPassengers" placeholder="30"/>
+                                    <?php
+                                    include_once './queries.php';
+                                    $queries = new queries();
+                                    $queries->get_data_on_load();
+                                    $row_queries = $queries->fetch();
+                                    
+                                    ?>
+                                    <input type="number" value=<?php
+                                        print $row_queries['onbus'];
+                                    ?> class="form-control" id="noOfPassengers" placeholder="30"/>
                                 </div>
                                 <!--</div>-->
                             </div>
@@ -46,30 +55,11 @@ and open the template in the editor.
                                     <label>Total Number of Seats</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="noOfSeats" placeholder="30"/>
+                                    <input type="number" value= <?php
+                                        print $row_queries['totalseats'];
+                                    ?> class="form-control" id="noOfSeats" placeholder="30" disabled/>
                                 </div>
                             </div>
-
-<!--                            <div class="col-xs-6 col-md-4">
-                                <div class="col-md-4">
-                                    <label>Nationality</label>
-                                </div>
-                                <div class="col-md-8">
-                                    <select class="form-control" id='nat'>
-                                        <?php
-//                                    include_once 'nationality.php';
-//                                    $nationality = new nationality();
-//                                    $nationality->get_all_nationalities();
-//                                    $row_nationality2 = $nationality->fetch();
-//                                    while ($row_nationality2) {
-//                                        echo "<option value =" . $row_nationality2["nationality_id"] . ">" . $row_nationality2["nationality"] . "</option> ";
-//                                        $row_nationality2 = $nationality->fetch();
-//                                    }
-//                                    
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>-->
                         </div>
 
                         <br>
@@ -81,7 +71,9 @@ and open the template in the editor.
                                     <label>Number of Reserved Seats</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <input type="number" class="form-control" id="noOfSeats" placeholder="30"/>
+                                    <input type="number" value=<?php
+                                        print $row_queries['reserved'];
+                                    ?> class="form-control" id="noOfResSeats" placeholder="30"/>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +81,7 @@ and open the template in the editor.
 
                         <div class="row">
                             <div class="col-xs-6 col-md-2">
-                                <input class="btn btn-success" type="button" value="SAVE" onclick="addNewStudent()" >
+                                <input class="btn btn-success" type="button" value="SAVE" onclick="save()" >
                             </div>
                             <div class="col-xs-6 col-md-2">
                                 <input class="btn btn-warning" type="button" value="Clear" onclick="empty()" >

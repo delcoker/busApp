@@ -267,69 +267,16 @@ function save() {
     //complete the url
 //    var vtop = document.getElementById("topic").value;
 
-    var date = $("#dateV").val();
-    var fname = $("#fnameV").val();
-    var mname = $("#mnameV").val();
-    var lname = $("#lnameV").val();
-    var dob = $("#dobV").val();
-    var nat = $("#natV").val();
-    var pob = $("#pobV").val();
-    var homet = $("#htownV").val();
-    var guard = $("#guardV").val();
-    var prevS = $("#prevSV").val();
-    var classfa = $("#classfaV").val();
-    var boardha = $("#boardhaV").val();
-    var med = $("#medV").val();
+    var onBus = $("#noOfPassengers").val();
+    var reserved = $("#noOfResSeats").val();
 
-    var id = globalVar;
+    var id = 1;
 
-    var u = "student_list_action.php?cmd=4&sid=" + id + "&date=" + date + "&fname=" + fname + "&mname=" + mname + "&lname=" + lname + "&nat=" + nat + "&dob=" + dob + "&pob=" + pob + "&homet=" + homet + "&guard=" + guard + "&prevS=" + prevS + "&classfa=" + classfa + "&boardha=" + boardha + "&med=" + med;
+    var u = "queries_action.php?cmd=" + 1 + "&onbus=" + onBus + "&reserved=" + reserved;
 //alert(u);
 //prompt("Copy to clipboard: Ctrl+C, Enter", u);
     r = syncAjax(u);
-//prompt("Copy to clipboard: Ctrl+C, Enter",r.result);
-//                alert(r.result);
-//    if (r.result == 2) { // signifies update
-//        $("#divStatus").text("Health Promotion: \"" + vtop + "\" updated");
-//        $("#divStatus").css({'color': 'yellow'});
-//        //change things in the span
-//        var nameCol = $(spanVarPar).children("td").get(1);
-//        $(nameCol).text(vtop);
-////                    $(nameCol).css({'color': 'violet', 'text-decoration':'underline', 'cursor':'hand' });
-//
-//        // method column change dymincs
-//        var methodColumn = $(spanVarPar).children("td").get(2);
-//        $(methodColumn).text(vmeth);
-//
-//        // date column change dymincs
-//        var dateColumn = $(spanVarPar).children("td").get(3);
-//        $(dateColumn).text(vdat);
-//    }
-//    else if (r.result == 5) { // signifies add
-//
-//        $("#divStatus").text("Health Promotion: \"" + vtop + "\" added");
-//        $("#divStatus").css({'color': 'yellow'});
-//
-//        var tabl = $(globalAddObj).closest("table");
-//        var lastRow = tabl.find("tr:last");
-//
-//        var newRow = $(lastRow).attr("class");
-//        if (newRow == "row1") {
-//            newRow = "row2";
-//        }
-//        else {
-//            newRow = "row1";
-//        }
-//        
-//        $(lastRow).after("<tr class ='" + newRow + "'><td onclick='quickView(this," + r.health_promotion.id + ")'>" + /*(r.health_promotion.rows + 1)*/ r.health_promotion.id + "</td><td class='hotspot1' onclick='quickView(this," + r.health_promotion.id + ")'>" + vtop + "</td><td onclick='quickView(this," + r.health_promotion.id + ")'>" + vmeth + "</td><td onclick='quickView(this," + r.health_promotion.id + ")'>" + vdat + "</td><td><span class='hotspot' onclick='edit(this," + r.health_promotion.id + ")'>edit<span></td><td><span class='hotspot2' onclick='del(this," + r.health_promotion.id + ")'>delete<span></td></tr>");
-//    }
-//    else {
-//        alert(r.health_promotion);
-//        alert("didn't add nor update. Could be because of '");
-//        return;
-//    }
-//    cancel();
-    disable();
+
 }
 
 function feedback(data) {
