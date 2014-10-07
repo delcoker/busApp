@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 /**
  * author: 
@@ -6,10 +6,14 @@
  * description: A root class for all manage classes. This class communicates with DB
  */
 define("DB_HOST", 'localhost');
-define("DB_NAME", 'mobilebusapp');
+define("DB_NAME", 'csashesi_kingston-coker');
 define("DB_PORT", 3306);
 define("DB_USER", "root");
 define("DB_PWORD", "");
+
+
+//define("DB_USER", "csashesi_kc15");
+//define("DB_PWORD", "db!a4df4d");
 
 define("LOG_LEVEL_SEC", 0);
 define("LOG_LEVEL_DB_FAIL", 0);
@@ -86,7 +90,8 @@ class adb {
      * returns a row from a data source
      */
     function fetch() {
-		//print_r(mysql_fetch_assoc(0));
+//		print_r(mysql_fetch_assoc(0));
+//       print "hrere". $this->result;
         return mysql_fetch_assoc($this->result);
     }
 
@@ -94,13 +99,14 @@ class adb {
      * connect to db and run a query 
      */
     function query($str_sql) {
-//        print $str_sql;
+//        print "hereeee---e" . $str_sql;
         if (!$this->connect()) {
+//           print "hereeeddddddddddddddde---e" . $str_sql;
             return false;
         }
 
         $this->result = mysql_query($str_sql);
-//        print $this->result;
+//        print "result" .$this->result;
         if (!$this->result) {
             $this->log_error(LOG_LEVEL_DB_FAIL, 4, "query failed", mysql_error($this->link));
             return false;

@@ -1,0 +1,2 @@
+<a href="#pageone" data-role="button" data-icon="" data-iconpos="right" class="ui-btn-left">Hi there <?php print $_SESSION['username']; ?></a>
+<a href="#pageone" data-role="button" data-icon="arrow-u" data-iconpos="right" class="ui-btn-right"  onclick="logout()">Logout</a>
