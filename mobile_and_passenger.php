@@ -17,7 +17,7 @@
       <link rel="stylesheet" href="css/delcss.css">
       <link rel="stylesheet" href="css/images/ajax-loader.gif">
 
-      <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyCEuD64KmpejqQq0avl0ZRG6GKUUIGa4Dc&sensor=false">
+      <script src="http://maps.googleapis.com/maps/api/js?v=3.exp">
       </script>
 
       <meta name="viewport" content="width-device-width, initial-scale=1">
@@ -338,7 +338,7 @@
                   <h1>Maps</h1>
                </div>
                <div role="main" class="ui-content" id="map-canvas">
-                  <!-- map loads here... -->
+                   map loads here... 
                </div>
             </div>
 
