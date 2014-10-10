@@ -6,6 +6,30 @@ function syncAjax(u) {
    return $.parseJSON(obj.responseText);
 }
 
+function increase(seatsLeft, passRes, passOn){
+//   alert("left"+seatsLeft);
+//   alert("res"+passRes);
+//   alert("on"+passOn);
+   seatsLeft = (seatsLeft - 1);
+   passRes = passRes - 1 ;
+   passOn = (passOn + 1);
+   
+   var u = "login_mobile_action_1.php?cmd=6&seats_left=" + seatsLeft + "&pass_res=" + passRes + "&pass_on=" + passOn;
+//   prompt("u", u);
+//   return;
+   r = syncAjax(u);
+   window.location.reload();
+}
+
+function decrease(seatsLeft, passRes, passOn){
+   seatsLeft = seatsLeft + 1;
+   passRes = passRes + 1;
+   passOn = passOn - 1;
+   var u = "login_mobile_action_1.php?cmd=6&seats_left=" + seatsLeft + "&pass_res=" + passRes + "&pass_on=" + passOn;
+   r = syncAjax(u);
+   window.location.reload();
+}
+
 function logout() {
    window.open("logout.php", "_self");
 }
@@ -17,7 +41,7 @@ function login() {
    var pass = document.getElementById("password").value;
 
    var u = "login_mobile_action_1.php?cmd=2&user=" + user + "&pass=" + pass;
-//   prompt("U",u);
+   prompt("U",u);
    r = syncAjax(u);
 
 //   prompt(r.user);
@@ -37,7 +61,7 @@ function login() {
       else if (r.user.role === 1) { // admin
 //         prompt("url", u);
 //      debugger;
-         window.open("mobile_and_admin.php#reserve", "_self");
+         window.open("mobile_and_admin.php#home", "_self");
       }
       else {
          alert("User does nhot have a role!!");
@@ -63,6 +87,7 @@ function pick_up(dropoff_id) {
 }
 
 function qrgenerate(rand) {
+//   window.location.reload();
    if (rand === "" || rand == null) {
       alert("Times are hard huh? You haven't paid yet! Sorry");
       return;
@@ -93,6 +118,11 @@ function payment() {
 //         $("#status").text("PAID");
 //         qrgenerate(ticket);
          window.open("mobile_and_passenger.php#view_payment", "_self");
+         window.location.reload();
+//         window.open("mobile_and_passenger.php#view_payment", "_self");
+
+//         window.reload("mobile_and_passenger.php#view_payment");
+//         window.location.href="mobile_and_passenger.php#view_payment";
          global_drop_off = 0;
       }
       else if (r.result === 0 && r.trans.message === "Already Reserved") {
@@ -162,9 +192,9 @@ var gloA = 0;
 var gloB = 0;
 function showBus(a, b) {
 //   debugger;
-gloA = a;
-gloB = b;
-window.open("map.php", "_self");
+   gloA = a;
+   gloB = b;
+   window.open("map.php", "_self");
    /*
     * Google Maps documentation: http://code.google.com/apis/maps/documentation/javascript/basics.html
     * Geolocation documentation: http://dev.w3.org/geo/api/spec-source.html

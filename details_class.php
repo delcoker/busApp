@@ -43,7 +43,7 @@ class deatils_class extends adb {
       return $res;
    }
 
-   function add_info( $seatsLeft, $numOfPssngrsReserved, $numOfSeats, $numOfPssngrsBus, $longitude, $locationAddress, $latitude) {
+   function add_info($seatsLeft, $numOfPssngrsReserved, $numOfSeats, $numOfPssngrsBus, $longitude, $locationAddress, $latitude) {
       //write the SQL query and call $this->query()
       $query = "insert into info(seatsLeft, numOfPssngrsReserved, numOfSeats, numOfPssngrsBus, longitude, locationAddress, latitude, date_modified, date_created) values($seatsLeft, $numOfPssngrsReserved, $numOfSeats, $numOfPssngrsBus, $longitude, '$locationAddress', $latitude, now(), now())";
 //        print $query;
@@ -78,6 +78,19 @@ class deatils_class extends adb {
 //        print $query;
 //        print mysql_error();
       return $this->query($query);
+   }
+
+   function update_pass($seatsLeft, $numOfPssngrsReserved, $numOfPssngrsBus, $info_id) {
+      $query = "Update info set numOfPssngrsReserved = $numOfPssngrsReserved,   seatsleft = $seatsLeft
+                                    ,   numOfPssngrsBus = $numOfPssngrsBus,   date_modified = now()
+                                     where  info_id = $info_id";
+//        print $query;
+//        print mysql_error();
+      return $this->query($query);
+   }
+
+   function update_pass_decrease() {
+      
    }
 
 }

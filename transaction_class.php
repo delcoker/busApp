@@ -34,5 +34,15 @@ class transaction_class extends adb {
       return $this->query($query);
    }
    
+   function get_all_transactions(){
+      $query = "Select user.username, transaction.date_created, transaction.amount_deducted from transaction left join user on user.user_id = transaction.user_id left join dropoff on transaction.pick_up_location = dropoff.dropoff_id;";
+//      print $query;
+      return $this->query($query);
+   }
    
+   function get_all_transactions_between($start, $end){
+      $query = "Select * from transaction left join user on user.user_id = transaction.user_id left join dropoff on transaction.pick_up_location = dropoff.dropoff_id where transaction.date_created between $start and $end;";
+//      print $query;
+      return $this->query($query);
+   }
 }

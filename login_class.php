@@ -12,7 +12,7 @@ class login_class extends adb {
       $query = "select count(*) as c from user where username = '$user' and password = '$pass'";
 //        print "quere " . $query;
       $this->query($query);
-
+      
       $result = $this->fetch();
       if ($result['c'] == 1) {
          
@@ -26,7 +26,7 @@ class login_class extends adb {
    function loadUserProfile($username) {
       //load username and other informaiton into the session      
       $query = "select * from user where username = '$username';";
-      
+//      print $query;
       $this->query($query);
 
       $result = $this->fetch();

@@ -2,7 +2,12 @@
 
 //Actions for promotions
 include_once './gen.php';
+//session_destroy();
+//if (!isset($_SESSION['last_insert_id'])) {
+//   session_start();
+//}
 //include "health_promotion.php";
+//$last_inserted_id = $_SESSION['last_insert_id'];
 
 $cmd = get_datan("cmd");
 //$last_inserted_id = 2;
@@ -38,12 +43,12 @@ switch ($cmd) {
       break;
 
    case 6;
-      // get one promotion
+      increase();
       break;
 
    case 7;
       // get idcho from health promotion
-
+      decrease();
       break;
 
 
@@ -60,11 +65,11 @@ switch ($cmd) {
 }
 
 function transact() {
-//   session_start();
+   session_start();
 //   $_SESSION['paid']=0;
 
 
-   $last_inserted_id = 1;
+   $last_inserted_id = $_SESSION['last_insert_id'];
 
    $id = get_datan('user_id');
    $new_amount = get_datan('new_amount');
@@ -145,6 +150,7 @@ function transact() {
 
 function login() {
    include_once './login_class.php';
+//   session_start();
    $user = get_data('user');
    $pass = get_data('pass');
    $p = new login_class();
@@ -169,43 +175,64 @@ function login() {
       echo jsons("message", "error, no record retrieved");
       echo "}";
    }
-////   if it's a new day - reset all values
-//   include_once './details_class.php';
-//   $det_obj = new deatils_class();
-//   if (!$det_obj->get_all_details()) {
-//      echo "{";
-//      echo jsonn("result", 0) . ",";
-//      echo jsons("message", "error, no record retrieved2");
-//      echo "}";
-//      return;
-//   }
-//   $last_inserted_id = 0;
-//   $row2 = $det_obj->fetch();
-////   print_r($row2);
-//   while ($row2) {
-//      $row3= $row2;
-//
-//      $last_inserted_id = $row2['info_id'];
-//      $_SESSION['last_insert_id'] = $last_inserted_id;
-//      
-//         $row2 = $det_obj->fetch();
-//      
-//   }
-////   print_r($row3);
-//
-//   $det_obj2 = new deatils_class();
-//   if ($row2['date_created'] == date('Y-m-d H:i:s')) {
-//      return;
-//   } else {
-//      // create a new info row
-//      if (!$det_obj->add_info($row3['numOfSeats'], 0, $row3['numOfSeats'], 0, $row3['longitude'], $row3['locationAddress'], $row3['latitude'])) {
-//         echo "{";
-//         echo jsonn("result", 0) . ",";
-//         echo jsons("message", "error, could not create new tuple");
-//         echo "}";
-//      }
-//      return;
-//   }
+//   if it's a new day - reset all values
+   include_once './details_class.php';
+   $det_obj = new deatils_class();
+   if (!$det_obj->get_all_details()) {
+      echo "{";
+      echo jsonn("result", 0) . ",";
+      echo jsons("message", "error, no record retrieved2");
+      echo "}";
+      return;
+   }
+   $last_inserted_id = 0;
+   $row2 = $det_obj->fetch();
+//   print_r($row2);
+   while ($row2) {
+      $row3 = $row2;
+
+      $last_inserted_id = $row2['info_id'];
+      $_SESSION['last_insert_id'] = $last_inserted_id;
+
+      $row2 = $det_obj->fetch();
+   }
+//   print_r($row3);
+
+   $det_obj2 = new deatils_class();
+
+//   print_r ($row3);
+//   print $row3['date_created'];
+
+   $dt = new DateTime($row3['date_created']);
+
+   $dt1 = $dt->format('d-m-Y');
+//   print "---------------" . ($row3['date_created']);
+   $dt2 = date('d-m-Y');
+//           
+//   print "dt1 " . ($dt1);
+//   print "dt2 " . ($dt2);
+//   print ($dt1 === $dt2);
+//   
+//exit();
+
+   if ($dt1 == $dt2) {
+//      print "here";
+      return;
+   } else {
+//      exit();
+      // create a new info row
+      if (!$det_obj->add_info($row3['numOfSeats'], 0, $row3['numOfSeats'], 0, $row3['longitude'], $row3['locationAddress'], $row3['latitude'])) {
+//       this should be concatenated witht the top
+         echo "{";
+         echo jsonn("result", 0) . ",";
+         echo jsons("message", "error, could not create new tuple");
+         echo "}";
+//         exit();
+      }
+      $_SESSION['last_insert_id'] = $det_obj->get_insert_id($det_obj);
+//      print "created";
+      return;
+   }
 }
 
 function diver_update_bus_location() {
@@ -246,4 +273,38 @@ function get_bus_loca() {
    echo jsons("y", $row['latitude']);
    echo "}";
    return;
+}
+
+function increase() {
+
+   session_start();
+   $last_inserted_id = $_SESSION['last_insert_id'];
+   $seats_left = get_data("seats_left");
+   $pass_res = get_data('pass_res');
+   $pass_on = get_data('pass_on');
+
+   include_once './details_class.php';
+   $d = new deatils_class();
+//exit();
+   $row4 = $d->update_pass($seats_left, $pass_res, $pass_on, $last_inserted_id);
+   
+   if (!$row4) {
+      echo "{";
+      echo jsonn("result", 0) . ",";
+      echo jsons("message", "error, Unsuccesful");
+      echo "}";
+      return;
+   }
+   echo "{";
+   echo jsonn("result", 1) . ",";
+   echo jsons("message", "Successful");
+   echo "}";
+}
+
+function decrease() {
+   session_start();
+//   $_SESSION['paid']=0;
+
+
+   $last_inserted_id = $_SESSION['last_insert_id'];
 }

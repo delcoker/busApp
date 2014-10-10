@@ -6,7 +6,7 @@ session_start();
 <html>
    <head>
       <?php
-////      session_destroy();
+//      session_destroy();
 //      session_start();
 
       if (!isset($_SESSION['username'])) {
@@ -69,33 +69,27 @@ session_start();
             ?>
             <br>
 
-            <!--when someone get's on or off bus-->
-            <a href="#" data-role="button" onclick='increase(<?php print $row_info['seatsLeft'] . "," . $row_info['numOfPssngrsReserved'] . "," . $row_info['numOfPssngrsBus'];
-            ?>)'>+ Increase Passengers</a>
-            <br>
-            <a href="#" data-role="button" onclick="decrease(<?php print $row_info['seatsLeft'] . "," . $row_info['numOfPssngrsReserved'] . "," . $row_info['numOfPssngrsBus'];
-            ?>)">- Decrease Passengers</a>
 
-            <br>
 
             <div data-role="controlgroup" data-type="vertical">
                <!--<Caption of group:</p>-->
-               <a href="#" data-role="button">Passengers that have reserved today</a>
+               <a href="#" data-role="button">Passengers and Fees</a>
             </div>
 
             <ol data-role="listview" data-inset="true" data-filter="true">
+
                <?php
                include_once './transaction_class.php';
                $user_obj = new transaction_class();
-               $user_obj->get_all_transactions_today();
+               $user_obj->get_all_transactions();
                $row_trans = $user_obj->fetch();
                while ($row_trans) {
                   print "<li><a href='#'>";
                   print $row_trans['username'];
                   print "    -   ";
                   print $row_trans['date_created'];
-                  print "    - >   ";
-                  print $row_trans['dropoff_name'];
+                  print "   [ Amount - >   ";
+                  print "GHC = " . $row_trans['amount_deducted'] . " ]";
                   print "</a></li>";
                   $row_trans = $user_obj->fetch();
                }
@@ -103,6 +97,7 @@ session_start();
             </ol>
 
          </div>
+
          <!------------------------------------------------------------>
          <div data-role="footer">
             <div data-role="controlgroup" data-type="horizontal">
